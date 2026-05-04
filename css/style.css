@@ -240,3 +240,49 @@ body {
 }
 .card button:hover  { transform: translateY(-2px); box-shadow: 0 6px 18px #c090e077; }
 .card button:active { transform: translateY(0);    box-shadow: 0 3px 8px  #c090e044; }
+
+/* ── Responsive mobile ── */
+@media (max-width: 520px) {
+  .stage {
+    width: 100vw;
+    height: 130vw;
+  }
+  .bg { width: 100%; height: 100%; }
+  .glass {
+    top: 8vw;
+    left: 12vw;
+    width: 76vw;
+    height: 84vw;
+  }
+  .score-badge {
+    top: 3.5vw;
+    right: 4vw;
+    width: 7.5vw; height: 7.5vw;
+    font-size: 3vw;
+  }
+  #joystickBase {
+    bottom: 6vw;
+    left: 60vw;
+    width: 16vw; height: 16vw;
+  }
+  #joystickHandle {
+    width: 7vw; height: 7vw;
+  }
+  .stop-btn {
+    bottom: 3.5vw;
+    left: 79vw;
+    width: 18vw; height: 18vw;
+  }
+  .el {
+    width: 100vw;
+  }
+  .pickup-btn {
+    bottom: 23vw;
+    left: 5vw;
+    width: 40vw;
+    height: 10vw;
+  }
+  .title {
+    font-size: 5.5vw;
+  }
+}
