@@ -2,12 +2,12 @@
 const friends = [
   { name: "Am",    img: "asset/Friends/Am.png",    msg: "โดนจับได้ซะแล้ว💦💦" },
   { name: "Koy",   img: "asset/Friends/Koy.png",   msg: "อยากอมหัวแมว" },
-  { name: "Mee",   img: "asset/Friends/Mee.png",   msg: "มี่โจ้ยใหญ่" },
+  { name: "Mee",   img: "asset/Friends/Mee.png",   msg: "พี่ชาวี พี่จะใส่สูทมาทำไม!!" },
   { name: "Pam",   img: "asset/Friends/Pam.png",   msg: "คนอ่านเป็นเอ๋" },
   { name: "Pin",   img: "asset/Friends/Pin.png",   msg: "ขอซัก 80 คับ" },
   { name: "P'Mook", img: "asset/Friends/Pmook.png", msg: "ไม่อยากอ่านญี่ปุ่นจ้า" },
   { name: "P'Nine", img: "asset/Friends/Pnine.png", msg: "โตไปไม่เอ๋นะ" },
-  { name: "P'Win",  img: "asset/Friends/Pwin.png",  msg: "คนนั้นบินเมื่อไรเดี๋ยวเลี้ยงเหล้า" },
+  { name: "P'Win",  img: "asset/Friends/Pwin.png",  msg: "เดี๋ยวเลี้ยงเหล้า" },
   { name: "Rin",   img: "asset/Friends/Rin.png",   msg: "ม่องลูกแมร๊" },
   { name: "Ferm",   img: "asset/Friends/Ferm.png",   msg: "อยากได้อดปจังเลยยย" },
 
@@ -27,9 +27,21 @@ const pickupBtn      = document.getElementById("pickupBtn");
 // ── Glass area bounds (relative to .glass) ──
 // glass: left:60 top:40 width:380 height:420 in stage coords
 // claw moves within glass x: 0..380, string hangs from top
-const GLASS_W = 380;
-const GLASS_H = 420;
-const BALL_R  = 30; // ball radius px
+const BALL_R = 30;
+
+function getGlassSize() {
+  const glass = document.querySelector('.glass');
+  const rect = glass.getBoundingClientRect();
+  return { w: rect.width, h: rect.height };
+}
+
+let GLASS_W = getGlassSize().w;
+let GLASS_H = getGlassSize().h;
+
+window.addEventListener('resize', () => {
+  GLASS_W = getGlassSize().w;
+  GLASS_H = getGlassSize().h;
+});
 
 let score    = 0;
 let canPlay  = true;
@@ -161,7 +173,7 @@ function retract() {
     } else {
       dropping = false;
       canPlay  = true;
-      checkGameOver();  // ← เพิ่มบรรทัดนี้
+      checkGameOver();
     }
   }
   requestAnimationFrame(ascend);
