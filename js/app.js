@@ -13,13 +13,13 @@ const friends = [
 
   { name: "Am",    img: "asset/Friends/Am_2.png",    msg: "อะจ๊ะเอ๋ตัวเอง" },
   { name: "Koy",   img: "asset/Friends/Koy_2.png",   msg: "เกิดแต่กับกรู" },
-  { name: "Mee",   img: "asset/Friends/Mee_2.png",   msg: "มี่รักน้องแอม จุ๊ฟม๊วฟ" },
+  { name: "Mee",   img: "asset/Friends/Mee_2.png",   msg: "มี่รักน้องแอม จุ๊บม๊วฟ" },
   { name: "Pam",   img: "asset/Friends/Pam_2.png",   msg: "หนุ่มแว่นเดอะเบส" },
   { name: "Pin",   img: "asset/Friends/Pin_2.png",   msg: "จน เครียด กินปิ่นมาย" },
-  { name: "P'Mook", img: "asset/Friends/Pmook_2.png", msg: "รักจันทร์เจ้านะลูก" },
+  { name: "P'Mook", img: "asset/Friends/Pmook_2.png", msg: "รักจันทร์จ้าวนะลูก" },
   { name: "P'Nine", img: "asset/Friends/Pnine_2.png", msg: "อ่อจ้า" },
   { name: "P'Win",  img: "asset/Friends/Pwin_2.png",  msg: "ชาบูวันไหนดี" },
-  { name: "Rin",   img: "asset/Friends/Rin_2.png",   msg: "ดลลี่ไม่ใช่ก้อนหิน (ไม่จริง)" },
+  { name: "Rin",   img: "asset/Friends/Rin_2.png",   msg: "✨#ดลลี่เนย🫶🏻🩷" },
   { name: "Ferm",   img: "asset/Friends/Ferm_2.png",   msg: "ใครจับได้เลี้ยงตี๋น้อยผมด้วย" },
 ];
 
