@@ -21,7 +21,6 @@ const friends = [
   { name: "P'Win",  img: "asset/Friends/Pwin_2.png",  msg: "ชาบูวันไหนดี" },
   { name: "Rin",   img: "asset/Friends/Rin_2.png",   msg: "ดลลี่ไม่ใช่ก้อนหิน (ไม่จริง)" },
   { name: "Ferm",   img: "asset/Friends/Ferm_2.png",   msg: "ใครจับได้เลี้ยงตี๋น้อยผมด้วย" },
-
 ];
 
 // ── DOM refs ──
@@ -35,9 +34,6 @@ const joystick       = document.getElementById("joystickHandle");
 const stopBtn        = document.getElementById("stopBtn");
 const pickupBtn      = document.getElementById("pickupBtn");
 
-// ── Glass area bounds (relative to .glass) ──
-// glass: left:60 top:40 width:380 height:420 in stage coords
-// claw moves within glass x: 0..380, string hangs from top
 const BALL_R = 30;
 
 let GLASS_W = 380;
@@ -45,15 +41,21 @@ let GLASS_H = 420;
 
 let score    = 0;
 let canPlay  = true;
-let clawX    = GLASS_W / 2;   // px, center of glass
-let clawY    = 0;              // string top offset (0 = retracted)
+let clawX    = GLASS_W / 2;
+let clawY    = 0;
 let isMoving = false;
 let moveInterval = null;
 let dropping = false;
 
-// joystick state
 let joyActive  = false;
 let joyDir     = { x: 0, y: 0 };
+
+// ── อัปเดตขนาด glass จาก DOM จริงๆ ──
+function updateGlassSize() {
+  const glass = document.querySelector('.glass');
+  GLASS_W = glass.offsetWidth;
+  GLASS_H = glass.offsetHeight;
+}
 
 // ── Spawn balls ──
 function spawnBalls() {
@@ -71,9 +73,12 @@ function spawnBalls() {
 }
 
 function randomizeBall(div) {
-  const margin = 10;
-  const x = margin + Math.random() * (GLASS_W - BALL_R * 2 - margin * 2);
-  const y = 60 + Math.random() * (GLASS_H - BALL_R * 2 - 100);
+  const glass = document.querySelector('.glass');
+  const gW = glass.offsetWidth;
+  const gH = glass.offsetHeight;
+  const margin = 8;
+  const x = margin + Math.random() * (gW - BALL_R * 2 - margin * 2);
+  const y = margin + Math.random() * (gH - BALL_R * 2 - margin * 2);
   div.style.left = x + "px";
   div.style.top  = y + "px";
 }
@@ -86,14 +91,23 @@ function animateBall(div) {
 
   function step() {
     if (!div.parentNode) return;
+
+    // ── อ่านขนาด glass จริงๆ ทุก frame เพื่อให้ responsive ถูก ──
+    const glass = document.querySelector('.glass');
+    const gW = glass.offsetWidth;
+    const gH = glass.offsetHeight;
+
     bx += vx;
     by += vy;
-    const maxX = GLASS_W - BALL_R * 2;
-    const maxY = GLASS_H - BALL_R * 2;
+
+    const maxX = gW - BALL_R * 2;
+    const maxY = gH - BALL_R * 2;
+
     if (bx < 0)    { bx = 0;    vx *= -1; }
     if (bx > maxX) { bx = maxX; vx *= -1; }
-    if (by < 40)   { by = 40;   vy *= -1; }
+    if (by < 0)    { by = 0;    vy *= -1; }
     if (by > maxY) { by = maxY; vy *= -1; }
+
     div.style.left = bx + "px";
     div.style.top  = by + "px";
     requestAnimationFrame(step);
@@ -120,10 +134,10 @@ function drop() {
     updateClaw();
     if (checkHitEarly()) {
       retract();
-    } else if (clawY < GLASS_H - 60) {
+    } else if (clawY < GLASS_H - 80) {
       requestAnimationFrame(descend);
     } else {
-      clawY = GLASS_H - 60;
+      clawY = GLASS_H - 80;
       updateClaw();
       retract();
     }
@@ -131,17 +145,20 @@ function drop() {
   requestAnimationFrame(descend);
 }
 
+// ── ตรวจชนโดยใช้พิกัดใน .glass โดยตรง (ไม่บวก offset) ──
 function checkHitEarly() {
-  const clawCX = 60 + clawX;
-  const clawCY = 40 + clawY;
+  // clawX, clawY คือตำแหน่งภายใน .glass แล้ว
+  const clawCX = clawX;
+  const clawCY = clawY;
 
   const balls = document.querySelectorAll(".ball");
   let hit = null;
   let minDist = 9999;
 
   balls.forEach(ball => {
-    const bx = parseFloat(ball.style.left) + 60 + BALL_R;
-    const by = parseFloat(ball.style.top)  + 40 + BALL_R;
+    // ball style.left/top คือตำแหน่งภายใน #balls ซึ่งอยู่ใน .glass
+    const bx = parseFloat(ball.style.left) + BALL_R;
+    const by = parseFloat(ball.style.top)  + BALL_R;
     const dx = bx - clawCX;
     const dy = by - clawCY;
     const dist = Math.sqrt(dx * dx + dy * dy);
@@ -179,35 +196,6 @@ function retract() {
   requestAnimationFrame(ascend);
 }
 
-function checkHit() {
-  const clawCX = 60 + clawX; // stage coords
-  const clawCY = 40 + clawY; // stage coords
-
-  const balls = document.querySelectorAll(".ball");
-  let hit = null;
-  let minDist = 9999;
-
-  balls.forEach(ball => {
-    const bx = parseFloat(ball.style.left) + 60 + BALL_R; // stage x center
-    const by = parseFloat(ball.style.top)  + 40 + BALL_R; // stage y center
-    const dx = bx - clawCX;
-    const dy = by - clawCY;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-    if (dist < 55 && dist < minDist) {
-      minDist = dist;
-      hit = ball;
-    }
-  });
-
-  if (hit) {
-    const data = friends[hit.dataset.index];
-    hit.remove();
-    score++;
-    scoreEl.textContent = score;
-    setTimeout(() => showPopup(data), 400);
-  }
-}
-
 // ── Popup ──
 function showPopup(data) {
   document.getElementById("popupName").textContent  = data.name;
@@ -221,6 +209,7 @@ document.getElementById("restartBtn").onclick = () => {
   document.getElementById("gameOverPopup").classList.remove("show");
   score = 0;
   scoreEl.textContent = 0;
+  updateGlassSize();
   clawX = GLASS_W / 2;
   clawY = 0;
   updateClaw();
@@ -323,13 +312,15 @@ function checkGameOver() {
 
 // ── Init ──
 window.addEventListener('load', () => {
-  GLASS_W = document.querySelector('.glass').offsetWidth;
-  GLASS_H = document.querySelector('.glass').offsetHeight;
+  updateGlassSize();
+  clawX = GLASS_W / 2;
   updateClaw();
   spawnBalls();
 });
 
 window.addEventListener('resize', () => {
-  GLASS_W = document.querySelector('.glass').offsetWidth;
-  GLASS_H = document.querySelector('.glass').offsetHeight;
+  updateGlassSize();
+  // clamp clawX ให้ไม่เกิน glass ใหม่
+  clawX = Math.min(clawX, GLASS_W);
+  updateClaw();
 });
