@@ -22,20 +22,41 @@ body {
   font-family: 'Itim', sans-serif;
 }
 
-/* ── Stage ── */
-.stage {
-  width: 500px;
-  height: 650px;
-  position: relative;
-  filter: drop-shadow(0 12px 32px rgba(120, 80, 180, 0.35)) drop-shadow(0 4px 12px rgba(0,0,0,0.18));
-}
-
 .bg {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
   z-index: 0;
   pointer-events: none;
+}
+
+/* ── Stage ── */
+.stage {
+  width: 500px;
+  height: 650px;
+  position: relative;
+  filter: drop-shadow(0 12px 32px rgba(120,80,180,0.35)) drop-shadow(0 4px 12px rgba(0,0,0,0.18));
+}
+
+/* ── Machine frame (replaces Machine.png) ── */
+.machine-frame {
+  position: absolute;
+  top: 12px; left: 12px; right: 12px;
+  height: 540px;
+  background: #f9c8d0;
+  border-radius: 32px;
+  z-index: 0;
+}
+
+/* ── Glass area ── */
+.glass {
+  position: absolute;
+  top: 40px; left: 60px;
+  width: 380px; height: 420px;
+  z-index: 1;
+  border-radius: 24px;
+  overflow: hidden;
+  background: white;
 }
 
 /* ── Score ── */
@@ -119,22 +140,6 @@ body {
   pointer-events: none;
   z-index: 2;
 }
-
-/* ── PICK UP button (overlay on PickUp.png area) ── */
-.pickup-btn {
-  position: absolute;
-  bottom: 118px;
-  left: 26px;
-  width: 200px;
-  height: 50px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  z-index: 8;
-  border-radius: 30px;
-}
-.pickup-btn:hover { background: rgba(255,255,255,0.15); }
-.pickup-btn:active { background: rgba(255,255,255,0.28); transform: scale(0.97); }
 
 /* ── Joystick ── */
 #joystickBase {
@@ -249,7 +254,7 @@ body {
   }
   .bg { width: 100%; height: 100%; }
   .glass {
-    top: 8vw;
+    top: 18vw;
     left: 12vw;
     width: 76vw;
     height: 84vw;
