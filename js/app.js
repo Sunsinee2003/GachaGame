@@ -9,7 +9,18 @@ const friends = [
   { name: "P'Nine", img: "asset/Friends/Pnine.png", msg: "โตไปไม่เอ๋นะ" },
   { name: "P'Win",  img: "asset/Friends/Pwin.png",  msg: "เดี๋ยวเลี้ยงเหล้า" },
   { name: "Rin",   img: "asset/Friends/Rin.png",   msg: "ม่องลูกแมร๊" },
-  { name: "Ferm",   img: "asset/Friends/Ferm.png",   msg: "อยากได้อดปจังเลยยย" },
+  { name: "Ferm",   img: "asset/Friends/Ferm.png",   msg: "อยากได้อดอปจังเลยยย" },
+
+  { name: "Am",    img: "asset/Friends/Am_2.png",    msg: "อะจ๊ะเอ๋ตัวเอง" },
+  { name: "Koy",   img: "asset/Friends/Koy_2.png",   msg: "เกิดแต่กับกรู" },
+  { name: "Mee",   img: "asset/Friends/Mee_2.png",   msg: "มี่รักน้องแอม จุ๊ฟม๊วฟ" },
+  { name: "Pam",   img: "asset/Friends/Pam_2.png",   msg: "หนุ่มแว่นเดอะเบส" },
+  { name: "Pin",   img: "asset/Friends/Pin_2.png",   msg: "จน เครียด กินปิ่นมาย" },
+  { name: "P'Mook", img: "asset/Friends/Pmook_2.png", msg: "รักจันทร์เจ้านะลูก" },
+  { name: "P'Nine", img: "asset/Friends/Pnine_2.png", msg: "อ่อจ้า" },
+  { name: "P'Win",  img: "asset/Friends/Pwin_2.png",  msg: "ชาบูวันไหนดี" },
+  { name: "Rin",   img: "asset/Friends/Rin_2.png",   msg: "ดลลี่ไม่ใช่ก้อนหิน (ไม่จริง)" },
+  { name: "Ferm",   img: "asset/Friends/Ferm_2.png",   msg: "ใครจับได้เลี้ยงตี๋น้อยผมด้วย" },
 
 ];
 
