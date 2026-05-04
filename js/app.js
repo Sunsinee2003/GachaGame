@@ -1,6 +1,6 @@
 // ── Friends Data ──
 const friends = [
-  { name: "Am",    img: "asset/Friends/Am.png",    msg: "ทุกคนโดนบอมแน่!!" },
+  { name: "Am",    img: "asset/Friends/Am.png",    msg: "โดนจับได้ซะแล้ว💦💦" },
   { name: "Koy",   img: "asset/Friends/Koy.png",   msg: "อยากอมหัวแมว" },
   { name: "Mee",   img: "asset/Friends/Mee.png",   msg: "มี่โจ้ยใหญ่" },
   { name: "Pam",   img: "asset/Friends/Pam.png",   msg: "คนอ่านเป็นเอ๋" },
