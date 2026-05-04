@@ -4,7 +4,7 @@ const friends = [
   { name: "Koy",   img: "asset/Friends/Koy.png",   msg: "อยากอมหัวแมว" },
   { name: "Mee",   img: "asset/Friends/Mee.png",   msg: "มี่โจ้ยใหญ่" },
   { name: "Pam",   img: "asset/Friends/Pam.png",   msg: "คนอ่านเป็นเอ๋" },
-  { name: "Pin",   img: "asset/Friends/Pin.png",   msg: "ปิ่นมายไม่สลับ" },
+  { name: "Pin",   img: "asset/Friends/Pin.png",   msg: "ขอซัก 80 คับ" },
   { name: "P'Mook", img: "asset/Friends/Pmook.png", msg: "ไม่อยากอ่านญี่ปุ่นจ้า" },
   { name: "P'Nine", img: "asset/Friends/Pnine.png", msg: "โตไปไม่เอ๋นะ" },
   { name: "P'Win",  img: "asset/Friends/Pwin.png",  msg: "คนนั้นบินเมื่อไรเดี๋ยวเลี้ยงเหล้า" },
