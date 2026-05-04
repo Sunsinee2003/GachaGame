@@ -102,7 +102,7 @@ function drop() {
   canPlay  = false;
   stopJoystick();
 
-  const speed = 2;
+  const speed = 5;
   function descend() {
     clawY += speed;
     updateClaw();
