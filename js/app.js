@@ -29,19 +29,8 @@ const pickupBtn      = document.getElementById("pickupBtn");
 // claw moves within glass x: 0..380, string hangs from top
 const BALL_R = 30;
 
-function getGlassSize() {
-  const glass = document.querySelector('.glass');
-  const rect = glass.getBoundingClientRect();
-  return { w: rect.width, h: rect.height };
-}
-
-let GLASS_W = getGlassSize().w;
-let GLASS_H = getGlassSize().h;
-
-window.addEventListener('resize', () => {
-  GLASS_W = getGlassSize().w;
-  GLASS_H = getGlassSize().h;
-});
+let GLASS_W = 380;
+let GLASS_H = 420;
 
 let score    = 0;
 let canPlay  = true;
@@ -322,5 +311,14 @@ function checkGameOver() {
 }
 
 // ── Init ──
-updateClaw();
-spawnBalls();
+window.addEventListener('load', () => {
+  GLASS_W = document.querySelector('.glass').offsetWidth;
+  GLASS_H = document.querySelector('.glass').offsetHeight;
+  updateClaw();
+  spawnBalls();
+});
+
+window.addEventListener('resize', () => {
+  GLASS_W = document.querySelector('.glass').offsetWidth;
+  GLASS_H = document.querySelector('.glass').offsetHeight;
+});
