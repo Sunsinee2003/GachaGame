@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Gacha Friends 🎀</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="title">🎀 Gacha Friends 🎀</div>
+
+<div class="stage" id="stage">
+  <!-- score -->
+  <div class="score-badge" id="score">0</div>
+
+  <!-- machine background -->
+  <img class="bg" src="asset/Game Element/Machine.png" alt="machine">
+
+  <!-- glass play area -->
+  <div class="glass">
+    <!-- balls -->
+    <div id="balls"></div>
+
+    <!-- claw -->
+    <div id="clawWrap">
+      <div id="string"></div>
+      <img id="clawImg" src="asset/Game Element/Keep.png" alt="claw">
+    </div>
+  </div>
+
+  <!-- bottom decorations -->
+  <img class="el" id="pickupEl" src="asset/Game Element/PickUp.png"     alt="">
+  <img id="stopBtn" src="asset/Game Element/StopButton.png" class="stop-btn">
+
+  <!-- PICK UP button -->
+  <button id="pickupBtn" class="pickup-btn" aria-label="Pick Up"></button>
+
+  <!-- Joystick -->
+  <div id="joystickBase">
+    <div id="joystickHandle"></div>
+  </div>
+
+<!-- Popup -->
+<div class="popup" id="popup">
+  <div class="card">
+    <h2 id="popupName"></h2>
+    <img id="popupAvatar" alt="friend">
+    <p id="popupMsg"></p>
+    <button id="closeBtn">OK 💖</button>
+  </div>
+</div>
+
+<!-- Game Over Popup -->
+<div class="popup" id="gameOverPopup">
+  <div class="card">
+    <h2>🎉 ได้ครบแล้ว! 🎉</h2>
+    <p>คุณจับเพื่อนได้ครบทุกคนแล้ว!</p>
+    <button id="restartBtn">เริ่มใหม่ 🎀</button>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

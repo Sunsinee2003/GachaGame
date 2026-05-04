@@ -1,0 +1,242 @@
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #c9b8e8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Itim', sans-serif;
+  user-select: none;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 900;
+  color: #7b4fa0;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 0 #e8d0ff;
+  font-family: 'Itim', sans-serif;
+}
+
+/* ── Stage ── */
+.stage {
+  width: 500px;
+  height: 650px;
+  position: relative;
+  filter: drop-shadow(0 12px 32px rgba(120, 80, 180, 0.35)) drop-shadow(0 4px 12px rgba(0,0,0,0.18));
+}
+
+.bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Score ── */
+.score-badge {
+  position: absolute;
+  top: 18px; right: 22px;
+  z-index: 10;
+  background: white;
+  border-radius: 50%;
+  width: 38px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 16px;
+  color: #7b4fa0;
+  box-shadow: 0 2px 6px #0002;
+}
+
+/* ── Glass area ── */
+.glass {
+  position: absolute;
+  top: 40px; left: 60px;
+  width: 380px; height: 420px;
+  z-index: 1;
+  border-radius: 30px;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* ── Balls ── */
+#balls {
+  position: absolute;
+  inset: 0;
+}
+
+.ball {
+  position: absolute;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  cursor: default;
+  filter: drop-shadow(0 3px 6px #0003);
+  transition: filter .15s;
+}
+
+.ball img {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ── Claw ── */
+#clawWrap {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  /* horizontal movement via JS: clawWrap.style.left */
+}
+
+#string {
+  width: 3px;
+  background: linear-gradient(#aaa, #777);
+  border-radius: 2px;
+  height: 0px; /* controlled by JS */
+  transition: height .05s linear;
+}
+
+#clawImg {
+  width: 56px;
+  filter: drop-shadow(0 3px 8px #0005);
+}
+
+/* ── Bottom layer images ── */
+.el {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 500px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── PICK UP button (overlay on PickUp.png area) ── */
+.pickup-btn {
+  position: absolute;
+  bottom: 118px;
+  left: 26px;
+  width: 200px;
+  height: 50px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 8;
+  border-radius: 30px;
+}
+.pickup-btn:hover { background: rgba(255,255,255,0.15); }
+.pickup-btn:active { background: rgba(255,255,255,0.28); transform: scale(0.97); }
+
+/* ── Joystick ── */
+#joystickBase {
+  position: absolute;
+  bottom: 30px;
+  left: 300px;
+  width: 80px; height: 80px;
+  background: radial-gradient(circle, #e8d6f5 60%, #c9b3e8 100%);
+  border-radius: 50%;
+  border: 3px solid #b59fd4;
+  box-shadow: 0 4px 12px #0003, inset 0 2px 4px #fff6;
+  z-index: 9;
+  cursor: pointer;
+  touch-action: none;
+}
+
+#joystickHandle {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px; height: 36px;
+  background: radial-gradient(circle at 35% 35%, #ff8fa3, #e05070);
+  border-radius: 50%;
+  box-shadow: 0 3px 8px #0004, inset 0 1px 3px #fff5;
+  transition: transform .08s ease;
+}
+
+/* ── STOP button ── */
+.stop-btn {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 15%;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform .1s;
+}
+
+/* ── Popup ── */
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+.popup.show { display: flex; }
+
+.card {
+  background: linear-gradient(160deg, #fff9fd 0%, #fce8f5 100%);
+  padding: 28px 32px 24px;
+  border-radius: 28px;
+  text-align: center;
+  box-shadow: 0 20px 60px #c090e055, 0 2px 8px #0002;
+  max-width: 300px;
+  width: 90%;
+  animation: popIn .3s cubic-bezier(.34,1.56,.64,1);
+}
+
+@keyframes popIn {
+  from { transform: scale(.6) translateY(20px); opacity: 0; }
+  to   { transform: scale(1)  translateY(0);    opacity: 1; }
+}
+
+.card h2 {
+  font-size: 26px;
+  font-weight: 900;
+  color: #9b4dc0;
+  margin-bottom: 14px;
+  letter-spacing: .5px;
+}
+
+.card img {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #e8b4f0;
+  box-shadow: 0 6px 20px #c090e044;
+  margin-bottom: 14px;
+}
+
+.card p {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.card button {
+  background: linear-gradient(135deg, #d87fe8, #a855c8);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 32px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 14px #c090e055;
+  transition: transform .15s, box-shadow .15s;
+}
+.card button:hover  { transform: translateY(-2px); box-shadow: 0 6px 18px #c090e077; }
+.card button:active { transform: translateY(0);    box-shadow: 0 3px 8px  #c090e044; }
